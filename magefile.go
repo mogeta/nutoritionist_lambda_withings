@@ -21,3 +21,16 @@ func Build() error {
 	fmt.Println(hash)
 	return err
 }
+
+func LocalRun() error{
+	//sam local invoke -e event.json -t template.yaml --env-vars sam_env.json
+	fmt.Println("Start...")
+	cmd :=[]string{"local","invoke",
+		"-e","event.json",
+		"-t","template.yaml",
+		"--env-vars","sam_env.json"}
+
+	hash,err :=sh.Output("sam",cmd...)
+	fmt.Println(hash)
+	return err
+}

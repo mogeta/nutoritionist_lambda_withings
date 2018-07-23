@@ -26,7 +26,7 @@ func hello(event interface{}) {
 		log.Fatalln(err)
 	}
 	defer client.Close()
-
+	log.Println("finish")
 	//_, _, err = client.Collection("users").Add(ctx, iratto{
 	//	Type:   event.DeviceEvent.ButtonClicked.ClickType,
 	//	Created: time.Now(),

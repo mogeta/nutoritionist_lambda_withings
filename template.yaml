@@ -4,7 +4,7 @@ Resources:
   App:
     Type: 'AWS::Serverless::Function'
     Properties:
-      Handler: myfirestore
+      Handler: withings
       Runtime: go1.x
       CodeUri: ./
       Timeout: 5
