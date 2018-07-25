@@ -3,4 +3,7 @@ withings
 firebase_secret_key.json
 sam_env.json
 
+# for withings api token
+config.toml
+
 .idea/
