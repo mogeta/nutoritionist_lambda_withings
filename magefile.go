@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"github.com/magefile/mage/sh"
+	"github.com/magefile/mage/mg"
 )
 
 // Default target to run when none is specified
@@ -17,7 +18,7 @@ func Build() error {
 		"GOARCH":"amd64",
 		"GOOS":"linux",
 	}
-	hash, err := sh.OutputWith(env,"go","build","withings.go")
+	hash, err := sh.OutputWith(env,"go","build","main.go")
 	fmt.Println(hash)
 	return err
 }
@@ -33,4 +34,10 @@ func LocalRun() error{
 	hash,err :=sh.Output("sam",cmd...)
 	fmt.Println(hash)
 	return err
+}
+
+func Execute(){
+	mg.Deps(Build)
+	mg.Deps(LocalRun)
+
 }
