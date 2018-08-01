@@ -19,21 +19,23 @@ func main() {
 	client := nokiahealth.NewClient(config.AuthData.ComsumerKey, config.AuthData.ComsumerSecret, "localhost")
 	user := client.GenerateUser(config.AuthData.AccessToken, config.AuthData.AccessSecret, config.AuthData.UserID)
 
-
+	//set query data
 	t := time.Now()
 	loc, _ := time.LoadLocation("Asia/Tokyo")
 	startDate := time.Date(t.Year(),t.Month(),t.Day(),0,0,0,0,loc).AddDate(0,0,-1)
 	endDate := time.Date(t.Year(),t.Month(),t.Day(),0,0,0,0,loc)
 
 	p := nokiahealth.BodyMeasuresQueryParams{}
-
 	p.StartDate = &startDate
 	p.EndDate = &endDate
 
+	//get weight data
 	m, err := user.GetBodyMeasures(&p)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	//parse
 	measures := m.ParseData()
 	fmt.Println(measures);
 }
