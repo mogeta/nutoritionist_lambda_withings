@@ -18,7 +18,7 @@ func Build() error {
 		"GOARCH":"amd64",
 		"GOOS":"linux",
 	}
-	hash, err := sh.OutputWith(env,"go","build","main.go")
+	hash, err := sh.OutputWith(env,"go","build","-o","main")
 	fmt.Println(hash)
 	return err
 }
