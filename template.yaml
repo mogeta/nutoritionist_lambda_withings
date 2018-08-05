@@ -7,7 +7,7 @@ Resources:
       Handler: main
       Runtime: go1.x
       CodeUri: ./
-      Timeout: 5
+      Timeout: 10
       Environment:
         Variables:
           SLACK_TOKEN: hogehoge

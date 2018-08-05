@@ -7,7 +7,7 @@ import (
 	"context"
 )
 
-func sendData(collectionName string,data interface{})  {
+func sendData(collectionName string,data []BodyData)  {
 	ctx := context.Background()
 
 	opt := option.WithCredentialsFile("./firebase_secret_key.json")
@@ -22,8 +22,10 @@ func sendData(collectionName string,data interface{})  {
 	}
 	defer client.Close()
 
+	for _, value := range data {
+		_, _, err = client.Collection(collectionName).Add(ctx, value)
+	}
 
-	_, _, err = client.Collection(collectionName).Add(ctx, data)
 
 	if err != nil {
 		log.Fatalf("Failed adding alovelace: %v", err)
