@@ -61,7 +61,7 @@ func (w WithingsManager)FetchSleepData(startDate,endDate time.Time){
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(m.Body.Series)
+	spew.Dump(m.Body.Series)
 
 }
 
