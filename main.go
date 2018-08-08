@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"time"
+	"github.com/BurntSushi/toml"
+	"log"
 )
 
 func main() {
@@ -11,12 +13,20 @@ func main() {
 
 func execute() {
 
+	var config Config
+	_, err := toml.DecodeFile("config.toml", &config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	withings := WithingsManager{config}
+
 	t := time.Now()
 	loc, _ := time.LoadLocation("Asia/Tokyo")
 	startDate := time.Date(t.Year(),t.Month(),t.Day(),0,0,0,0,loc).AddDate(0,0,-1)
 	endDate := time.Date(t.Year(),t.Month(),t.Day(),0,0,0,0,loc)
 
-	measureData := fetchWeightData(startDate,endDate)
+	measureData := withings.FetchWeightData(startDate,endDate)
 	body := make([]BodyData, len(measureData.Weights))
 	for key := range measureData.Weights {
 		body[key].Weight = measureData.Weights[key].Kgs
