@@ -22,12 +22,6 @@ type WithingsManager struct {
 }
 
 func (w WithingsManager)FetchWeightData(startDate,endDate time.Time) *nokiahealth.BodyMeasures{
-	//var config Config
-	//_, err := toml.DecodeFile("config.toml", &config)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-
 	//create client
 	client := nokiahealth.NewClient(w.config.AuthData.ComsumerKey, w.config.AuthData.ComsumerSecret, "localhost")
 	user := client.GenerateUser(w.config.AuthData.AccessToken, w.config.AuthData.AccessSecret, w.config.AuthData.UserID)
@@ -47,6 +41,7 @@ func (w WithingsManager)FetchWeightData(startDate,endDate time.Time) *nokiahealt
 	return measures
 }
 
+//FetchSleepData is fetch sleep data & upload to firestore
 func (w WithingsManager)FetchSleepData(startDate,endDate time.Time){
 	client := nokiahealth.NewClient(w.config.AuthData.ComsumerKey, w.config.AuthData.ComsumerSecret, "localhost")
 	user := client.GenerateUser(w.config.AuthData.AccessToken, w.config.AuthData.AccessSecret, w.config.AuthData.UserID)
@@ -65,6 +60,7 @@ func (w WithingsManager)FetchSleepData(startDate,endDate time.Time){
 
 }
 
+//FetchActivityData is fetch step data & upload to firestore
 func (w WithingsManager)FetchActivityData(startDate,endDate time.Time){
 	client := nokiahealth.NewClient(w.config.AuthData.ComsumerKey, w.config.AuthData.ComsumerSecret, "localhost")
 	user := client.GenerateUser(w.config.AuthData.AccessToken, w.config.AuthData.AccessSecret, w.config.AuthData.UserID)
