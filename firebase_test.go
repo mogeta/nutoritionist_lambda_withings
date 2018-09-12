@@ -6,5 +6,4 @@ import (
 
 func TestFirebaseData(t *testing.T){
 	sendDataWithExistCheck()
-
 }
